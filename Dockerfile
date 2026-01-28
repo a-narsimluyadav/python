@@ -13,5 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
+# Expose the port the app listens on
+EXPOSE 8000
+
 # Specify the command to run the application when the container starts
-CMD ["python", "./app.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
